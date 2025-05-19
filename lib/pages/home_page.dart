@@ -93,7 +93,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   CupertinoButton(
                     padding: EdgeInsets.zero,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (currentCurrency == "UZS") {
+                        currentCurrency = "USD";
+                      } else if (currentCurrency == "USD") {
+                        currentCurrency = "UZS";
+                      }
+                      setState(() {});
+                    },
                     child: Text(currentCurrency),
                   ),
                   CupertinoButton(
