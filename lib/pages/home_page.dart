@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -73,13 +74,35 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
-                  )
+                  ),
                 ],
               ),
 
               // History
+              SizedBox(height: 20),
+              Expanded(
+                child: SizedBox(),
+              ),
+              SizedBox(height: 20),
 
               // New Sum
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(),
+                  ),
+                  CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {},
+                    child: Text(currentCurrency),
+                  ),
+                  CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {},
+                    child: Icon(Icons.send),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
