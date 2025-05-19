@@ -99,8 +99,12 @@ class _HomePageState extends State<HomePage> {
                         keyboardType: TextInputType.number,
                         onTapOutside: (value) => focus.unfocus(),
                         onChanged: (value) => key.currentState!.validate(),
+                        decoration: InputDecoration(
+                          hintText: "Summa...",
+                        ),
                         validator: (value) {
                           int? sum = int.tryParse(value ?? "");
+
                           if (value?.isEmpty == true) {
                             return null;
                           }
@@ -110,8 +114,14 @@ class _HomePageState extends State<HomePage> {
                           }
 
                           if (currentCurrency == "UZS") {
-                            if ((sum >= 5000 && sum <= 1000000) == false) {
-                              return "Minimum 5ming som va maksimum 1mln so'm kiriting";
+                            if ((sum >= 5000 && sum <= 10000000) == false) {
+                              return "Min 5K UZS, Max 10M UZS";
+                            }
+                          }
+
+                          if (currentCurrency == "USD") {
+                            if ((sum >= 5 && sum <= 1000) == false) {
+                              return "Min 5 USD, Max 1000 USD";
                             }
                           }
                         },
@@ -125,6 +135,7 @@ class _HomePageState extends State<HomePage> {
                         } else if (currentCurrency == "USD") {
                           currentCurrency = "UZS";
                         }
+                        key.currentState!.validate();
                         setState(() {});
                       },
                       child: Text(currentCurrency),
