@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,7 +9,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<int> amounts = [];
+  List<DateTime> dateTimes = [];
+  List<String> currency = [];
+  int total = 0;
+  int uzsTotal = 0;
+  int usdTotal = 0;
 
+  final controller = TextEditingController();
+  String currentCurrency = "UZS";
+
+  void calculate() {
+    for (var i = 0; i < amounts.length; i++) {
+      if (currency[i] == "UZS") {
+        total += amounts[i];
+        uzsTotal += amounts[i];
+      } else if (currency[i] == "USD") {
+        total += (amounts[i] * 12900);
+        usdTotal += amounts[i];
+      }
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +41,41 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               // Status
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${NumberFormat.decimalPattern().format(total)} UZS",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${NumberFormat.decimalPattern().format(usdTotal)} USD",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    "  ●  ",
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                  Text(
+                    "${NumberFormat.decimalPattern().format(uzsTotal)} UZS",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
 
               // History
 
@@ -30,17 +87,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
